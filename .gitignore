@@ -1,0 +1,21 @@
+Content/__ExternalActors__
+Content/__ExternalObjects__
+Content/FirstPerson
+Content/FirstPersonArms
+Content/FPWeapon
+Content/LevelPrototyping
+Content/MedievalDungeon
+DerivedDataCache
+Intermediate
+Saved
+Plugins
+Binaries
+SCK_Casual01.png
+Link to Source Assets.txt
+*.bin
+*.pdb
+*.umap
+*.log
+*.pch
+.vs
+.vscode

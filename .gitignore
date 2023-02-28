@@ -16,3 +16,4 @@ Binaries
 *.pch
 .vs
 .vscode
+*_BuiltData*

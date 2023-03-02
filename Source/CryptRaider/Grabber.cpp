@@ -61,8 +61,13 @@ void UGrabber::Grab()
 	if (GetGrabbableInReach(HitResult))
 	{
 		UPrimitiveComponent* HitComponent = HitResult.GetComponent();
+		HitComponent->SetSimulatePhysics(true);
 		HitComponent->WakeAllRigidBodies();
-		HitResult.GetActor()->Tags.Add("Grabbed");
+
+		AActor* Actor = HitResult.GetActor();
+		
+		Actor->Tags.Add("Grabbed");
+		Actor->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			HitComponent,

@@ -31,16 +31,27 @@ void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponent
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (ShouldMove)
+	AActor* Actor = GetOwner();
+
+	if (!Actor)
 	{
-		FVector CurrentLocation = GetOwner()->GetActorLocation();
-		FVector TargetLocation = OriginalLocation + MoveOffset;
-		float Speed = FVector::Distance(OriginalLocation, TargetLocation) / MoveTime;
-
-		FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, Speed);
-
-		GetOwner()->SetActorLocation(NewLocation);
+		UE_LOG(LogTemp, Warning, TEXT("Mover - Actor does not exist."));
+		return;
 	}
+
+	FVector CurrentLocation = Actor->GetActorLocation();
+	FVector TargetLocation = OriginalLocation;
+	
+
+	if (ShouldMove)
+	{	
+		TargetLocation += MoveOffset;
+	}
+
+	float Speed = MoveOffset.Length() / MoveTime;
+	FVector NewLocation = FMath::VInterpConstantTo(CurrentLocation, TargetLocation, DeltaTime, Speed);
+	Actor->SetActorLocation(NewLocation);
+
 }
 
 void UMover::SetShouldMove(bool NewShouldMove)
